@@ -42,4 +42,8 @@ public class User {
 
     @Column(columnDefinition = "float default '30'")
     private float userFat;
+
+    @ManyToOne
+    @JoinColumn(name = "role_name")
+    private Role roleName;
 }
