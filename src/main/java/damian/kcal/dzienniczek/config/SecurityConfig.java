@@ -12,6 +12,11 @@ Linki:
 https://docs.spring.io/spring-security/site/docs/current/guides/html5/helloworld-boot.html
  */
 
+
+
+
+
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

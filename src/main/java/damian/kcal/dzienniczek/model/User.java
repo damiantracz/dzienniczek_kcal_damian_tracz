@@ -46,4 +46,100 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_name")
     private Role roleName;
+
+
+    //gettery, settery
+    public int getId(){
+        return userId;
+    }
+
+    public void setId(int userId) {
+        this.userId = userId;
+    }
+
+
+
+    public String getUserName(){
+        return userName;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
+
+    public String getUserEmail(){
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+
+    public String getUserPassword(){
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword){
+        this.userPassword = userPassword;
+    }
+
+
+    public Date getUserCreatedDate(){
+        return userCreatedDate;
+    }
+
+    public void setUserCreatedDate(Date date){
+        this.userCreatedDate = date;
+    }
+
+
+
+
+    public float getUserCarbohydrate(){
+        return userCarbohydrate;
+    }
+
+
+    public void setUserCarbohydrate(float userCarbohydrate){
+        this.userCarbohydrate = userCarbohydrate;
+    }
+
+
+
+    public float getUserProtein(){
+        return userProtein;
+    }
+
+    public void setUserProtein(float userProtein){
+        this.userProtein = userProtein;
+    }
+
+
+    public float getUserFat(){
+        return userFat;
+    }
+
+    public void setUserFat(float userFat){
+        this.userFat = userFat;
+    }
+
+
+
+
+    public Role getRoleName(){
+        return roleName;
+    }
+
+    public void setRoleName(Role roleName){
+        this.roleName = roleName;
+    }
+
+
+
+
+
+
+
 }
