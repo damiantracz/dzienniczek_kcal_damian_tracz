@@ -15,9 +15,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
+    private Integer userId;
 
-    @Size(min = 6, max = 20)
+//    @Size(min = 6, max = 20)
     @NotNull
     @Column(unique = true)
     private String userName;
@@ -28,8 +28,11 @@ public class User {
     private String userEmail;
 
     @NotNull
-    @Size(min = 7, max = 25)
+    @Size(min = 7)
     private String userPassword;
+
+    @Transient   //nie tworzy pola w bazie danych
+    private String userPassword2;
 
     @CreationTimestamp
     private Date userCreatedDate;
@@ -43,9 +46,6 @@ public class User {
     @Column(columnDefinition = "float default '30'")
     private float userFat;
 
-    @ManyToOne
-    @JoinColumn(name = "role_name")
-    private Role roleName;
 
 
     //gettery, settery
@@ -85,6 +85,13 @@ public class User {
         this.userPassword = userPassword;
     }
 
+    public String getUserPassword2() {
+        return userPassword2;
+    }
+
+    public void setUserPassword2(String userPassword2) {
+        this.userPassword2 = userPassword2;
+    }
 
     public Date getUserCreatedDate(){
         return userCreatedDate;
@@ -124,21 +131,6 @@ public class User {
     public void setUserFat(float userFat){
         this.userFat = userFat;
     }
-
-
-
-
-    public Role getRoleName(){
-        return roleName;
-    }
-
-    public void setRoleName(Role roleName){
-        this.roleName = roleName;
-    }
-
-
-
-
 
 
 
