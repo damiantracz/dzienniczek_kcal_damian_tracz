@@ -1,137 +1,101 @@
 package damian.kcal.dzienniczek.model;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
-@EnableAutoConfiguration
 @Table(name = "User")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer userId;
+    private int id;
 
-//    @Size(min = 6, max = 20)
-    @NotNull
-    @Column(unique = true)
-    private String userName;
+    @Column(name = "email")
+    private String email;
 
-    @Size(max = 256)
-    @NotNull
-    @Column(unique = true)
-    private String userEmail;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @NotNull
-    @Size(min = 7)
-    private String userPassword;
+    @Column(name = "lastname")
+    private String lastname;
 
-    @Transient   //nie tworzy pola w bazie danych
-    private String userPassword2;
+    @Column(name = "password")
+    private String password;
 
-    @CreationTimestamp
-    private Date userCreatedDate;
+    @Column(name = "active")
+    private int active;
 
-    @Column(columnDefinition = "float default '100'")
-    private float userCarbohydrate;
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+    private Set<Role> roles;
 
-    @Column(columnDefinition = "float default '100'")
-    private float userProtein;
-
-    @Column(columnDefinition = "float default '30'")
-    private float userFat;
-
-
-
-    //gettery, settery
-    public int getId(){
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-
-
-    public String getUserName(){
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName){
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
-    public String getUserEmail(){
-        return userEmail;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-
-    public String getUserPassword(){
-        return userPassword;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setUserPassword(String userPassword){
-        this.userPassword = userPassword;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getUserPassword2() {
-        return userPassword2;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword2(String userPassword2) {
-        this.userPassword2 = userPassword2;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getUserCreatedDate(){
-        return userCreatedDate;
+    public int getActive() {
+        return active;
     }
 
-    public void setUserCreatedDate(Date date){
-        this.userCreatedDate = date;
+    public void setActive(int active) {
+        this.active = active;
     }
 
-
-
-
-    public float getUserCarbohydrate(){
-        return userCarbohydrate;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-
-    public void setUserCarbohydrate(float userCarbohydrate){
-        this.userCarbohydrate = userCarbohydrate;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-
-
-    public float getUserProtein(){
-        return userProtein;
-    }
-
-    public void setUserProtein(float userProtein){
-        this.userProtein = userProtein;
-    }
-
-
-    public float getUserFat(){
-        return userFat;
-    }
-
-    public void setUserFat(float userFat){
-        this.userFat = userFat;
-    }
-
-
-
 }

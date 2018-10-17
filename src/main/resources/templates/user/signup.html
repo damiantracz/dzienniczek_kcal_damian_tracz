@@ -10,13 +10,11 @@
 </head>
 <body>
 <div class="container">
-    <!--<form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">-->
-    <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}">
+    <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="alert alert-success" role="alert" th:if="${msg}" th:utext="${msg}">
-                <!--<div class="alert alert-success" role="alert">-->
                 </div>
             </div>
         </div>
@@ -29,19 +27,32 @@
         </div>
         <div class="row">
             <div class="col-md-3 field-label-responsive">
-                <label for="firstname">Login</label>
+                <label for="name">First Name</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                        <input type="text" th:field="*{user.userName}" class="form-control" id="firstname"
-                               placeholder="Login" required autofocus>
+                        <input type="text" th:field="*{firstname}" class="form-control" id="firstname"
+                               placeholder="First Name" required autofocus>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="name">Last Name</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text" th:field="*{lastname}" class="form-control" id="lastname"
+                               placeholder="Last name" required autofocus>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-3 field-label-responsive">
                 <label for="email">Email</label>
@@ -50,20 +61,18 @@
                 <div class="form-group">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                        <input type="text" th:field="*{user.userEmail}" class="form-control" id="email"
+                        <input type="text" th:field="*{email}" class="form-control" id="email"
                                placeholder="username@jackrutorial.com" required autofocus>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('user.userEmail')}" th:errors="*{user.userEmail}">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                          </span>
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-md-3 field-label-responsive">
                 <label for="password">Password</label>
@@ -72,43 +81,18 @@
                 <div class="form-group has-danger">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" th:field="*{user.userPassword}" class="form-control" id="password"
-                               placeholder="Password" required minlength="7" maxlength="25">
+                        <input type="password" th:field="*{password}" class="form-control" id="password"
+                               placeholder="Password" required>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('user.userPassword')}" th:errors="*{user.userPassword}">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
                          </span>
                 </div>
             </div>
         </div>
-
-
-
-        <div class="row">
-            <div class="col-md-3 field-label-responsive">
-                <label for="password">Password</label>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" th:field="*{user.userPassword2}" class="form-control" id="password2"
-                               placeholder="Password" required minlength="7" maxlength="25" data-match="#password">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('user.userPassword2')}" th:errors="*{user.userPassword2}">
-                         </span>
-                </div>
-            </div>
-        </div>
-
-
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">

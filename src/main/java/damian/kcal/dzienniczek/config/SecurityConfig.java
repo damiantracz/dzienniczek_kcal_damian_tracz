@@ -31,37 +31,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private DataSource dataSource;
 
-    private final String USERS_QUERY = "select email, password from user where email=?";
-    //private final String ROLES_QUERY = "select u.email, r.role from user u inner join user_role ur on (u.id = ur.user_id) inner join role r on (ur.role_id=r.role_id) where u.email=?";
+    private final String USERS_QUERY = "select email, password, active from user where email=?";
+    private final String ROLES_QUERY = "select u.email, r.role from user u inner join user_role ur on (u.id = ur.user_id) inner join role r on (ur.role_id=r.role_id) where u.email=?";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-            .usersByUsernameQuery(USERS_QUERY)
-            //.authoritiesByUsernameQuery(ROLES_QUERY)
-            .dataSource(dataSource)
-            .passwordEncoder(bCryptPasswordEncoder);
+                .usersByUsernameQuery(USERS_QUERY)
+                .authoritiesByUsernameQuery(ROLES_QUERY)
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/login").permitAll()
-            .antMatchers("/signup").permitAll()
-            .antMatchers("/home/**").hasAnyAuthority("ADMIN").anyRequest()
-            .authenticated().and().csrf().disable()
-            .formLogin().loginPage("/login").failureUrl("/login?error=true")
-            .defaultSuccessUrl("/home/home")
-            .usernameParameter("email")
-            .passwordParameter("password")
-            .and().logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/")
-            .and().rememberMe()
-            .tokenRepository(persistentTokenRepository())
-            .tokenValiditySeconds(60*60)
-            .and().exceptionHandling().accessDeniedPage("/access_denied");
+                .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/home/**").hasAuthority("ADMIN").anyRequest()
+                .authenticated().and().csrf().disable()
+                .formLogin().loginPage("/login").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/home/home")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .and().rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(60*60)
+                .and().exceptionHandling().accessDeniedPage("/access_denied");
     }
 
     @Bean
@@ -71,34 +71,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         return db;
     }
-
 }
-
-
-
-
-
-/*
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/css/**", "/index").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .and()
-                .formLogin()
-                .loginPage("/login").failureUrl("/login-error");
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("{noop}password").roles("USER");
-                //{noop} - https://stackoverflow.com/questions/46999940/spring-boot-passwordencoder-error
-    }
-}
-*/

@@ -4,8 +4,8 @@ import damian.kcal.dzienniczek.model.User;
 
 public interface UserService {
 
-    User findByUserEmail(String userEmail);
+    public User findUserByEmail(String email);
 
-    void saveUser(User user);
+    public void saveUser(User user);
 }
 
