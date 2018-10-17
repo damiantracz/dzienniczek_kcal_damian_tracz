@@ -1,5 +1,9 @@
 package damian.kcal.dzienniczek.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="role")
+@NoArgsConstructor   //lombok
+@AllArgsConstructor  //lombok
+@Data
+//Adnotacja ta łączy w sobie kilka innych: @Getter, @Setter, @HashCodeAndEquals, @RequiredArgsConstructor oraz @ToString.
 public class Role {
 
     @Id
@@ -19,7 +27,7 @@ public class Role {
     @Column(name="role")
     private String role;
 
-    public int getId() {
+/*    public int getId() {
         return id;
     }
 
@@ -33,5 +41,5 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
-    }
+    }*/
 }

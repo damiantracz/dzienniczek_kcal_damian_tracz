@@ -1,5 +1,10 @@
 package damian.kcal.dzienniczek.model;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -16,8 +21,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "User")
+@NoArgsConstructor   //lombok
+@AllArgsConstructor  //lombok
+@Data  //Adnotacja ta łączy w sobie kilka innych: @Getter, @Setter, @HashCodeAndEquals, @RequiredArgsConstructor oraz @ToString.
 public class User {
 
     @Id
@@ -43,7 +52,7 @@ public class User {
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
     private Set<Role> roles;
 
-    public int getId() {
+/*    public int getId() {
         return id;
     }
 
@@ -97,5 +106,5 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
+    }*/
 }
