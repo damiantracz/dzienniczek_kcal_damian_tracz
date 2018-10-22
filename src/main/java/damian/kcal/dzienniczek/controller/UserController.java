@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -76,4 +77,7 @@ public class UserController {
         model.setViewName("errors/access_denied");
         return model;
     }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    public List<User> getAllUsers() {return userService.findAllUsers();}
 }
