@@ -119,7 +119,7 @@
                 <div class="form-group has-danger">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" th:field="*{password}" class="form-control" id="password2"
+                        <input type="password" th:field="*{password2}" class="form-control" id="password2"
                                placeholder="Confirm password" required>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
 
             <div class="col-md-4">
                 <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">
                          </span>
                 </div>
             </div>
