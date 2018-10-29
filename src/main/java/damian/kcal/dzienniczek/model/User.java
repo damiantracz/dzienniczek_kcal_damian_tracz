@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -45,6 +47,13 @@ public class User {
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
     private Set<Role> roles;
+
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER,
+//            mappedBy = "user")
+//    private Set<Weight> weights;
+
+
 
 /*    public int getId() {
         return id;

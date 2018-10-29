@@ -9,4 +9,5 @@ public class DzienniczekApplication {
     public static void main(String[] args) {
         SpringApplication.run(DzienniczekApplication.class, args);
     }
+
 }
