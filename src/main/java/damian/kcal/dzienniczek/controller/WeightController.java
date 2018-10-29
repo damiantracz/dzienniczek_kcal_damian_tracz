@@ -50,11 +50,30 @@ public class WeightController {
         weight.setUser(user);
         weightService.saveWeight(weight);
 
-
-
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         return "TEXT";
+    }
+
+
+    @RequestMapping(value= {"/user/weight2"}, method=RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Weight> getAllWeights2() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+        return weightService.findAllWeights();
+    }
+
+    @RequestMapping(value= {"/user/weight3"}, method=RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<Weight> getAllWeights3() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+        return weightService.findByUser(user);
     }
 
 }

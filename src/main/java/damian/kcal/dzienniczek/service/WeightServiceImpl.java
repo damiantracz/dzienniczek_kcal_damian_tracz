@@ -32,4 +32,15 @@ public class WeightServiceImpl implements WeightService {
         weightRepository.save(weight);
     }
 
+    @Override
+    public List<Weight> findAllWeights() {
+        return (List<Weight>) weightRepository.findAll();
+    }
+
+
+    @Override
+    public List<Weight> findByUser(User user){
+        return (List<Weight>) weightRepository.findByUser(user);
+    }
+
 }
