@@ -1,5 +1,6 @@
 package damian.kcal.dzienniczek.controller;
 
+import damian.kcal.dzienniczek.model.Makro;
 import damian.kcal.dzienniczek.model.User;
 import damian.kcal.dzienniczek.model.Weight;
 import damian.kcal.dzienniczek.service.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,7 +33,26 @@ public class WeightController {
     @Autowired
     private WeightService weightService;
 
+
+
     @RequestMapping(value= {"/user/weight"}, method=RequestMethod.GET)
+    public ModelAndView weight() {
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+        List<Weight> weightList = new ArrayList<Weight>();
+        weightList = weightService.findByUser(user);
+
+        model.addObject("userName", user.getFirstname() + " " + user.getLastname());
+        model.addObject("userWeights", weightList);
+        model.setViewName("user/weight");
+        return model;
+    }
+
+
+
+    @RequestMapping(value= {"/user/weight1"}, method=RequestMethod.GET)
     @ResponseBody
     public String plaintext(HttpServletResponse response) {
 
