@@ -1,6 +1,8 @@
 package damian.kcal.dzienniczek.controller;
 
+import damian.kcal.dzienniczek.model.Makro;
 import damian.kcal.dzienniczek.model.User;
+import damian.kcal.dzienniczek.service.MakroService;
 import damian.kcal.dzienniczek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MakroService makroService;
 
     @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
     public ModelAndView login() {
@@ -66,7 +72,16 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
 
+        List<Makro> makroList = new ArrayList<Makro>();
+        makroList = makroService.findByUser(user);
+
+        Makro makro = new Makro();
+        makro = makroList.get(makroList.size() - 1);
+
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
+        model.addObject("userCarbohydrates", makro.getCarbohydrates());
+        model.addObject("userProtein", makro.getProtein());
+        model.addObject("userFat", makro.getFat());
         model.setViewName("home/home");
         return model;
     }
