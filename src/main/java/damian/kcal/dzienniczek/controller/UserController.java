@@ -2,8 +2,10 @@ package damian.kcal.dzienniczek.controller;
 
 import damian.kcal.dzienniczek.model.Makro;
 import damian.kcal.dzienniczek.model.User;
+import damian.kcal.dzienniczek.model.Weight;
 import damian.kcal.dzienniczek.service.MakroService;
 import damian.kcal.dzienniczek.service.UserService;
+import damian.kcal.dzienniczek.service.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,9 @@ public class UserController {
     @Autowired
     private MakroService makroService;
 
+    @Autowired
+    private WeightService weightService;
+
     @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView model = new ModelAndView();
@@ -35,6 +40,15 @@ public class UserController {
         model.setViewName("user/login");
         return model;
     }
+
+    @RequestMapping(value= {"/home2"}, method=RequestMethod.GET)
+    public ModelAndView home2() {
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("home/home2");
+        return model;
+    }
+
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.GET)
     public ModelAndView signup() {
@@ -78,10 +92,22 @@ public class UserController {
         Makro makro = new Makro();
         makro = makroList.get(makroList.size() - 1);
 
+        List<Weight> weightList = new ArrayList<Weight>();
+        weightList = weightService.findByUser(user);
+
+        List<Float> onlyWeightList = new ArrayList<Float>();
+
+        for (Weight weightL : weightList){
+            onlyWeightList.add(weightL.getWeight());
+            System.out.println(weightL.getWeight());
+        }
+
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
         model.addObject("userCarbohydrates", makro.getCarbohydrates());
         model.addObject("userProtein", makro.getProtein());
         model.addObject("userFat", makro.getFat());
+        model.addObject("onlyWeightList", onlyWeightList);
+        model.addObject("weightList", weightList);
         model.setViewName("home/home");
         return model;
     }

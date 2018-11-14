@@ -87,7 +87,7 @@ public class WeightController {
         return weightService.findAllWeights();
     }
 
-    @RequestMapping(value= {"/user/weight3"}, method=RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value= {"/user/weights"}, method=RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<Weight> getAllWeights3() {
 
