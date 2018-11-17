@@ -13,6 +13,7 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin.css" rel="stylesheet">
 
+
 </head>
 
 <body class="bg-dark">
@@ -103,32 +104,109 @@
                          <span class="text-danger align-middle" th:if="${#fields.hasErrors('password')}"
                                th:errors="*{password}">
                          </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 field-label-responsive">
-                <label for="password2">Confirm password</label>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                        <input type="password" th:field="*{password2}" class="form-control" id="password2"
-                               placeholder="Confirm password" required>
+                        </div>
+                    </div>
+                 </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-4 field-label-responsive">
+                        <label for="password2">Confirm password</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                <input type="password" th:field="*{password2}" class="form-control" id="password2"
+                                       placeholder="Confirm password" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-control-feedback">
+                                 <span class="text-danger align-middle" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">
+                                 </span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">
-                         </span>
+                <!--line break-->
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-4 field-label-responsive">
+                        <label for="weight">Twoja waga ciała</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                <input type="number"  value="60" class="form-control" id="weight"
+                                       placeholder="Podaj wagę" required autofocus>
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
+                <div class="row">
+                    <div class="col-md-4 field-label-responsive">
+                        <label for="weight">Płeć</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                <select class="form-control" id="sex">
+                                    <option value="1.1">Mężczyzna</option>
+                                    <option value="0.9">Kobieta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 field-label-responsive">
+                        <label for="work">Praca</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                <select class="form-control" id="work">
+                                    <option value="1.1">Siedząca</option>
+                                    <option value="1.3">Stojąca</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--line break-->
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-4 field-label-responsive">
+                        <label for="kcal">Zapotrzebowanie kcal</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                <span id="kcal">2032</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--line break-->
+                <hr />
 
 
                 <div class="row">
@@ -141,6 +219,7 @@
                 </div>
 
             </form>
+
 
             <div class="text-center">
                 <a class="d-block small mt-3" th:href="@{/login}">Login Page</a>
@@ -159,6 +238,35 @@
 
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+
+        function calcKcal() {
+            var weight = $("#weight").val();
+            var sex = $("#sex").val();
+            var work = $("#work").val();
+            var calc = weight * 28 * sex * work;
+            return parseInt(calc);
+        }
+
+        $("#weight").change(function() {
+            $("#kcal").text(calcKcal());
+        });
+
+
+        $("#sex").change(function() {
+            $("#kcal").text(calcKcal());
+        });
+
+
+        $("#work").change(function() {
+            $("#kcal").text(calcKcal());
+        });
+
+    });
+</script>
 
 </body>
 </html>
