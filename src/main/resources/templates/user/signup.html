@@ -13,13 +13,12 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin.css" rel="stylesheet">
 
-
 </head>
 
 <body class="bg-dark">
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-        <div class="card-header">Register an Account</div>
+        <div class="card-header">Zarejestruj konto</div>
         <div class="card-body">
 
             <form role="form" method="POST" th:action="@{/signup}" th:object="${user}">
@@ -34,14 +33,14 @@
 
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
-                        <label for="name">First Name</label>
+                        <label for="firstname">Imię</label>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
                                 <input type="text" th:field="*{firstname}" class="form-control" id="firstname"
-                                       placeholder="First Name" required autofocus>
+                                       placeholder="Imię" required autofocus>
                             </div>
                         </div>
                     </div>
@@ -49,14 +48,14 @@
 
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
-                        <label for="name">Last Name</label>
+                        <label for="lastname">Nazwisko</label>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
                                 <input type="text" th:field="*{lastname}" class="form-control" id="lastname"
-                                       placeholder="Last name" required autofocus>
+                                       placeholder="Nazwisko" required autofocus>
                             </div>
                         </div>
                     </div>
@@ -71,7 +70,7 @@
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                                 <input type="email" th:field="*{email}" class="form-control" id="email"
-                                       placeholder="username@domain.com" required autofocus>
+                                       placeholder="nazwa@domena.com" required autofocus>
                             </div>
                         </div>
                     </div>
@@ -89,13 +88,13 @@
 
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
-                        <label for="password">Password</label>
+                        <label for="password">Hasło</label>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group has-danger">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password" required>
+                                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Hasło" required>
                             </div>
                         </div>
                     </div>
@@ -106,20 +105,20 @@
                          </span>
                         </div>
                     </div>
-                 </div>
+                </div>
 
 
 
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
-                        <label for="password2">Confirm password</label>
+                        <label for="password2">Powtórz hasło</label>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group has-danger">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
                                 <input type="password" th:field="*{password2}" class="form-control" id="password2"
-                                       placeholder="Confirm password" required>
+                                       placeholder="Powtórz hasło" required>
                             </div>
                         </div>
                     </div>
@@ -135,16 +134,16 @@
                 <!--line break-->
                 <hr />
 
-                <div class="row">
+                <div class="row" th:object="${weight}">
                     <div class="col-md-4 field-label-responsive">
                         <label for="weight">Twoja waga ciała</label>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
-                                <input type="number"  value="60" class="form-control" id="weight"
-                                       placeholder="Podaj wagę" required autofocus>
+                                <div class="input-group-addon" style="width: 2.6rem"  ><i class="fa fa-info"></i></div>
+                                <input type="number" value="60"  min="30"   th:field="*{weight}"  class="form-control" id="weight"
+                                       placeholder="Podaj wagę" required>
                             </div>
                         </div>
                     </div>
@@ -204,6 +203,57 @@
                 </div>
 
 
+                <div th:object="${makro}">
+                    <div class="row">
+                        <div class="col-md-4 field-label-responsive">
+                            <label for="carbohydrates">Węglowodany [g[</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                    <!--<span id="carbohydrates" th:field="*{carbohydrates}">150</span>-->
+                                    <input style="background-color: transparent; border: 0px solid; pointer-events:none; padding-left: 0px; padding-top: 0px" type="text" value="60"  min="30"   th:field="*{carbohydrates}"  class="form-control" id="carbohydrates"
+                                            required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 field-label-responsive">
+                            <label for="protein">Białko [g]</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                    <!--<span id="protein" th:field="*{protein}">80</span>-->
+                                    <input style="background-color: transparent; border: 0px solid; pointer-events:none; padding-left: 0px; padding-top: 0px" type="text" value="60"  min="30"   th:field="*{protein}"  class="form-control" id="protein"
+                                            required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 field-label-responsive">
+                            <label for="fat">Tłuszcz [g]</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-info"></i></div>
+                                    <!--<span id="fat" th:field="*{fat}">60</span>-->
+                                    <input style="background-color: transparent; border: 0px solid; pointer-events:none; padding-left: 0px; padding-top: 0px" type="text" value="60"  min="30"   th:field="*{fat}"  class="form-control" id="fat"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <!--line break-->
                 <hr />
@@ -213,7 +263,7 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="fa fa-user-plus"></i>
-                            Register
+                            Zarejestruj
                         </button>
                     </div>
                 </div>
@@ -222,7 +272,7 @@
 
 
             <div class="text-center">
-                <a class="d-block small mt-3" th:href="@{/login}">Login Page</a>
+                <a class="d-block small mt-3" th:href="@{/login}">Strona logowania</a>
                 <!--<a class="d-block small" href="forgot-password.html">Forgot Password?</a>-->
             </div>
 
@@ -243,6 +293,11 @@
 <script>
     $(document).ready(function() {
 
+        $("#weight").val("60");
+        $("#carbohydrates").val("254");
+        $("#protein").val("50");
+        $("#fat").val("90");
+
         function calcKcal() {
             var weight = $("#weight").val();
             var sex = $("#sex").val();
@@ -251,19 +306,29 @@
             return parseInt(calc);
         }
 
-        $("#weight").change(function() {
+        function changeValue(){
             $("#kcal").text(calcKcal());
+            $("#carbohydrates").val(parseInt(calcKcal()*0.5/4));
+            $("#protein").val(parseInt(calcKcal()*0.1/4));
+            $("#fat").val(parseInt(calcKcal()*0.4/9));
+        }
+
+        $("#weight").change(function() {
+            changeValue();
         });
 
 
         $("#sex").change(function() {
-            $("#kcal").text(calcKcal());
+            changeValue();
         });
 
 
         $("#work").change(function() {
-            $("#kcal").text(calcKcal());
+            changeValue();
         });
+
+
+
 
     });
 </script>

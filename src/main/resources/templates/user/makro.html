@@ -22,8 +22,8 @@
 
 <!--<body>-->
 <!--<div class="container">-->
-    <!--<h2>Hi <span th:utext="${userName}"></span>, this is the home page.</h2>-->
-    <!--<a th:href="@{/logout}">Sign out</a>-->
+<!--<h2>Hi <span th:utext="${userName}"></span>, this is the home page.</h2>-->
+<!--<a th:href="@{/logout}">Sign out</a>-->
 <!--</div>-->
 
 <body id="page-top">
@@ -58,21 +58,21 @@
 
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/home/home">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Twoje preferencje</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item" href="/user/weight">Waga</a>
+                <a class="dropdown-item active" href="/user/weight">Waga</a>
                 <a class="dropdown-item" href="/user/makro">Kcal</a>
-                <a class="dropdown-item" href="register.html">Produkty</a>
+                <a class="dropdown-item" href="/user/product">Produkty</a>
             </div>
         </li>
         <li class="nav-item">
@@ -94,69 +94,64 @@
                 <li class="breadcrumb-item active">Hi <span th:utext="${userName}"></span></li>
             </ol>
 
-            <!-- Icon Cards-->
-            <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-primary o-hidden h-60">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fas fa-fw fa-list"></i>
-                            </div>
-                            <div class="mr-5">Kcal zostało: <span th:utext="${userCarbohydrates*4 + userProtein*4 + userFat*9}"></span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-warning o-hidden h-60">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fas fa-fw fa-list"></i>
-                            </div>
-                            <div class="mr-5">Węglowodany zostało: <span th:utext="${userCarbohydrates}"></span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-success o-hidden h-60">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fas fa-fw fa-list"></i>
-                            </div>
-                            <div class="mr-5">Białko zostało: <span th:utext="${userProtein}"></span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-danger o-hidden h-60">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                                <i class="fas fa-fw fa-list"></i>
-                            </div>
-                            <div class="mr-5">Tłuszcz zostało: <span th:utext="${userFat}"></span></div>
-                        </div>
+
+
+
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Twoja waga</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Węglowodany</th>
+                                <th>Białko</th>
+                                <th>Tłuszcze</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Data</th>
+                                <th>Białko</th>
+                                <th>Tłuszcze</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="userMakro : ${userMakros}">
+                                <td th:text="${userMakro.date}"></td>
+                                <td th:text="${userMakro.carbohydrates}"></td>
+                                <td th:text="${userMakro.protein}"></td>
+                                <td th:text="${userMakro.fat}"></td>
+                                <td>Edytuj Usuń</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Area Chart Example-->
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-area"></i>
-                    Twoja waga</div>
-                <div class="card-body">
-                    <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
+
 
         </div>
         <!-- /.container-fluid -->
+
+
+
+
+
 
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © Damian Tracz 2018</span>
+                    <span>Copyright © Your Website 2018</span>
                 </div>
             </div>
         </footer>
@@ -212,85 +207,7 @@
 <script src="/js/sb-admin.min.js"></script>
 <!-- Demo scripts for this page-->
 <script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/js/demo/chart-area-demo.js"></script>-->
-
-<script>
-
-    // Set new default font family and font color to mimic Bootstrap's default styling
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
-
-    // Area Chart Example
-    var ctx = document.getElementById("myAreaChart");
-    var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [0,0,0],
-            datasets: [{
-                label: "Sessions",
-                lineTension: 0.3,
-                backgroundColor: "rgba(2,117,216,0.2)",
-                borderColor: "rgba(2,117,216,1)",
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(2,117,216,1)",
-                pointBorderColor: "rgba(255,255,255,0.8)",
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                pointHitRadius: 50,
-                pointBorderWidth: 2,
-                data: [0, 0, 0]
-            }],
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'date'
-                    },
-                    gridLines: {
-                        display: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 7
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: 200,
-                        maxTicksLimit: 5
-                    },
-                    gridLines: {
-                        color: "rgba(0, 0, 0, .125)",
-                    }
-                }],
-            },
-            legend: {
-                display: false
-            }
-        }
-    });
-
-
-
-    $.getJSON('http://localhost:8080/user/weights', function(data) {
-
-        var dateList = [];
-        var weightList = [];
-
-        for (var i = 0; i < data.length; i++){
-            var day = data[i]['date'];
-            dateList.push(day.substr(0, day.indexOf('T')));
-            weightList.push(data[i]['weight']);
-        }
-
-        myLineChart.data.labels = dateList;
-        myLineChart.data.datasets[0].data = weightList;
-        myLineChart.update();
-
-    });
-
-</script>
+<script src="/js/demo/chart-area-demo.js"></script>
 
 </body>
 </html>

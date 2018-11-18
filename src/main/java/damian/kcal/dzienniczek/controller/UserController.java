@@ -54,14 +54,18 @@ public class UserController {
     public ModelAndView signup() {
         ModelAndView model = new ModelAndView();
         User user = new User();
+        Weight weight = new Weight();
+        Makro makro = new Makro();
         model.addObject("user", user);
+        model.addObject("weight", weight);
+        model.addObject("makro", makro);
         model.setViewName("user/signup");
 
         return model;
     }
 
     @RequestMapping(value= {"/signup"}, method=RequestMethod.POST)
-    public ModelAndView createUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createUser(@Valid User user, @Valid Weight weight, @Valid Makro makro, BindingResult bindingResult) {
         ModelAndView model = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
 
@@ -72,6 +76,12 @@ public class UserController {
             model.setViewName("user/signup");
         } else {
             userService.saveUser(user);
+
+            weight.setUser(user);
+            weightService.saveWeight(weight);
+
+            makro.setUser(user);
+            makroService.saveMakro(makro);
             model.addObject("msg", "User has been registered successfully! Now you can login <a href='/login'></a>");
             model.addObject("user", new User());
             model.setViewName("user/signup");
