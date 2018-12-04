@@ -30,7 +30,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="">Dzienniczek</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -95,6 +95,25 @@
             </ol>
 
 
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Dodaj akutalną wagę
+                </div>
+                <div class="card-body">
+
+                    <form class="form-inline" role="form" method="POST" th:action="@{/user/weight}" th:object="${weight}">
+                        <div class="form-group">
+                            <label style="margin-left:5px" for="weight"><b>Aktualna waga:</b></label>
+                            <input style="margin-left:5px" type="number" class="form-control" min="30" value="30" id="weight" th:field="*{weight}">
+                        </div>
+
+                        <button style="margin-left:5px" type="submit" class="btn btn-primary">Uaktualnij</button>
+                    </form>
+
+                </div>
+            </div>
 
 
 
@@ -102,7 +121,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Twoja waga</div>
+                    Historia wag</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -124,7 +143,7 @@
                             <tr th:each="userWeight : ${userWeights}">
                                 <td th:text="${userWeight.date}"></td>
                                 <td th:text="${userWeight.weight}"></td>
-                                <td>Edytuj Usuń</td>
+                                <td><a th:href="@{'/user/weight/' + ${userWeight.id}}">Edytuj</a> <a th:href="@{'/user/weight/' + ${userWeight.id}}">Usuń</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -145,7 +164,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2018</span>
+                    <span>Copyright © Damian Tracz 2018</span>
                 </div>
             </div>
         </footer>

@@ -9,32 +9,32 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user_makro")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class Makro {
+    @Table(name = "user_makro")
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    public class Makro {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private int id;
 
-    @CreationTimestamp
-    @Column(name = "date")
-    private Date date;
+        @CreationTimestamp
+        @Column(name = "date")
+        private Date date;
 
-    @Column(name = "carbohydrates")
-    private double carbohydrates;
+        @Column(name = "carbohydrates")
+        private double carbohydrates;
 
-    @Column(name = "protein")
-    private double protein;
+        @Column(name = "protein")
+        private double protein;
 
-    @Column(name = "fat")
-    private double fat;
+        @Column(name = "fat")
+        private double fat;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "user_id")
+        private User user;
 
 
 }

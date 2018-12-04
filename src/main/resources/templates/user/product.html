@@ -30,7 +30,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="">Dzienniczek</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -96,9 +96,111 @@
 
 
 
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Dodaj nowy produkt
+                </div>
+                <div class="card-body">
+
+                    <!--https://www.bootply.com/jrNvaahcOh-->
+                    <div class="container-fluid">
+                    <form class="form-horizontal" role="form">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-md-12 control-label">Nazwa produktu:</label>
+                                    <div class="col-md-12">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Nazwa produktu">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="inputLabel3" class="col-md-12 control-label">Węglowodany/100g:</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="inputLabel3" placeholder="Węglowodany/100g:">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="inputLabel4" class="col-md-12 control-label">Białko/100g:</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="inputLabel4" placeholder="Białko/100g">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="input5" class="col-md-12 control-label">Tłuszcz/100g:</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="input5" placeholder="Tłuszcz/100g">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.row this actually does not appear to be needed with the form-horizontal -->
+
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn-ld btn-primary ">Zapisz</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    </div>
 
 
-            <!-- content here ->
+                </div>
+            </div>
+
+
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Historia wag</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Węglowodany/100g</th>
+                                <th>Białko/100g</th>
+                                <th>Tłuszcz/100g</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Węglowodany/100g</th>
+                                <th>Białko/100g</th>
+                                <th>Tłuszcz/100g</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="userProduct : ${userProducts}">
+                                <td th:text="${userProduct.name}"></td>
+                                <td th:text="${userProduct.carbohydrates}"></td>
+                                <td th:text="${userProduct.protein}"></td>
+                                <td th:text="${userProduct.fat}"></td>
+                                <td>Edytuj Usuń</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -114,7 +216,7 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2018</span>
+                        <span>Copyright © Damian Tracz 2018</span>
                     </div>
                 </div>
             </footer>
