@@ -64,18 +64,18 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item dropdown active">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Twoje preferencje</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item active" href="/user/weight">Waga</a>
+                <a class="dropdown-item" href="/user/weight">Waga</a>
                 <a class="dropdown-item" href="/user/makro">Kcal</a>
                 <a class="dropdown-item" href="/user/product">Produkty</a>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="/user/diary">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Dzienniczek</span></a>
@@ -96,41 +96,91 @@
 
 
 
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Dodaj nowy produkt
+                </div>
+                <div class="card-body">
+
+                    <!--https://www.bootply.com/jrNvaahcOh-->
+                    <div class="container-fluid">
+                        <form class="form-horizontal" role="form">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputEmail" class="col-md-12 control-label">Wybierz produkt:</label>
+                                        <div class="col-md-12">
+                                            <!--<input type="email" class="form-control" id="inputEmail" placeholder="Nazwa produktu">-->
+                                            <select class="browser-default custom-select" size="4">
+                                                <option selected>Zero</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                                <option value="4">Four</option>
+                                                <option value="5">Five</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputLabel3" class="col-md-12 control-label">Ilość [g]:</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" id="inputLabel3" placeholder="Ilość [g]:">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.row this actually does not appear to be needed with the form-horizontal -->
+
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-ld btn-primary ">Zapisz</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
 
 
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Twoja waga</div>
+                    Historia dzienniczka</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>Data</th>
-                                <th>Węglowodany</th>
-                                <th>Białko</th>
-                                <th>Tłuszcze</th>
+                                <th>Nazwa</th>
+                                <th>Ilosc</th>
                                 <th>Akcja</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Data</th>
-                                <th>Węglowodany</th>
-                                <th>Białko</th>
-                                <th>Tłuszcze</th>
+                                <th>Nazwa</th>
+                                <th>Ilosc</th>
                                 <th>Akcja</th>
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr th:each="userMakro : ${userMakros}">
-                                <td th:text="${userMakro.date}"></td>
-                                <td th:text="${userMakro.carbohydrates}"></td>
-                                <td th:text="${userMakro.protein}"></td>
-                                <td th:text="${userMakro.fat}"></td>
-                                <td>Edytuj Usuń</td>
+                            <tr >
+
                             </tr>
                             </tbody>
                         </table>

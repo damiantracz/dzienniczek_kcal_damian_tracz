@@ -67,7 +67,7 @@ public class WeightController {
 
         if(userExists != null) {
 
-            weight.setWeight(80);
+            //weight.setWeight(80);
             weight.setUser(user);
             weightService.saveWeight(weight);
 

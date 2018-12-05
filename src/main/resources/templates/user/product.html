@@ -76,7 +76,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="/user/diary">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Dzienniczek</span></a>
         </li>
@@ -106,13 +106,13 @@
 
                     <!--https://www.bootply.com/jrNvaahcOh-->
                     <div class="container-fluid">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="POST" th:action="@{/user/product}" th:object="${product}">
                         <div class="row">
                             <div class="col-sm-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="inputEmail" class="col-md-12 control-label">Nazwa produktu:</label>
+                                    <label for="name" class="col-md-12 control-label">Nazwa produktu:</label>
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Nazwa produktu">
+                                        <input type="text" class="form-control" id="name" placeholder="Nazwa produktu" th:field="*{name}">
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="form-group">
                                     <label for="inputLabel3" class="col-md-12 control-label">Węglowodany/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="inputLabel3" placeholder="Węglowodany/100g:">
+                                        <input type="text" class="form-control" id="inputLabel3" placeholder="Węglowodany/100g:" th:field="*{carbohydrates}">
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                 <div class="form-group">
                                     <label for="inputLabel4" class="col-md-12 control-label">Białko/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="inputLabel4" placeholder="Białko/100g">
+                                        <input type="text" class="form-control" id="inputLabel4" placeholder="Białko/100g" th:field="*{protein}">
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <div class="form-group">
                                     <label for="input5" class="col-md-12 control-label">Tłuszcz/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="input5" placeholder="Tłuszcz/100g">
+                                        <input type="text" class="form-control" id="input5" placeholder="Tłuszcz/100g" th:field="*{fat}">
                                     </div>
                                 </div>
                             </div>
