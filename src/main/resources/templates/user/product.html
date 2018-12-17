@@ -112,31 +112,31 @@
                                 <div class="form-group">
                                     <label for="name" class="col-md-12 control-label">Nazwa produktu:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="name" placeholder="Nazwa produktu" th:field="*{name}">
+                                        <input type="text" class="form-control" id="name" placeholder="Nazwa produktu" name="name" th:field="*{name}" required="required" autofocus="autofocus">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="inputLabel3" class="col-md-12 control-label">Węglowodany/100g:</label>
+                                    <label for="carbohydrates" class="col-md-12 control-label">Węglowodany/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="inputLabel3" placeholder="Węglowodany/100g:" th:field="*{carbohydrates}">
+                                        <input type="number" class="form-control" id="carbohydrates" placeholder="Węglowodany/100g:" name="carbohydrates"  required="required" step="0.01" pattern="\d*">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="inputLabel4" class="col-md-12 control-label">Białko/100g:</label>
+                                    <label for="protein" class="col-md-12 control-label">Białko/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="inputLabel4" placeholder="Białko/100g" th:field="*{protein}">
+                                        <input type="number" class="form-control" id="protein" placeholder="Białko/100g"  name="protein" required="required" step="0.01" pattern="\d*">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6">
                                 <div class="form-group">
-                                    <label for="input5" class="col-md-12 control-label">Tłuszcz/100g:</label>
+                                    <label for="fat" class="col-md-12 control-label">Tłuszcz/100g:</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="input5" placeholder="Tłuszcz/100g" th:field="*{fat}">
+                                        <input type="number" class="form-control" id="fat" placeholder="Tłuszcz/100g" name="fat"  required="required" step="0.01" pattern="\d*">
                                     </div>
                                 </div>
                             </div>
