@@ -106,29 +106,26 @@
 
                     <!--https://www.bootply.com/jrNvaahcOh-->
                     <div class="container-fluid">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" method="POST" th:action="@{/user/diary}" th:object="${diary}">
                             <div class="row">
                                 <div class="col-sm-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-md-12 control-label">Wybierz produkt:</label>
+                                        <label for="product" class="col-md-12 control-label">Wybierz produkt:</label>
                                         <div class="col-md-12">
                                             <!--<input type="email" class="form-control" id="inputEmail" placeholder="Nazwa produktu">-->
-                                            <select class="browser-default custom-select" size="4">
-                                                <option selected>Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                                <option value="5">Five</option>
+                                            <select id="product" name="product" class="browser-default custom-select" size="4" >
+                                                <option th:each="productList : ${allProductList}" th:value="${productList.id}" th:text="${productList.name}">
+                                                </option>
+
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-lg-6">
                                     <div class="form-group">
-                                        <label for="inputLabel3" class="col-md-12 control-label">Ilość [g]:</label>
+                                        <label for="weight" class="col-md-12 control-label">Ilość [g]:</label>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control" id="inputLabel3" placeholder="Ilość [g]:">
+                                            <input type="text" class="form-control" id="weight" name="weight" placeholder="Ilość [g]:">
                                         </div>
                                     </div>
                                 </div>
@@ -179,8 +176,11 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr >
-
+                            <tr th:each="diaryList : ${allDiaryList}">
+                                <td th:text="${diaryList.date}"></td>
+                                <td th:text="${diaryList.product.name}"></td>  <!--"data-department=${user.department!=null}?${user.department.name}:'not specified'"-->
+                                <td th:text="${diaryList.weight}"></td>
+                                <td>Edytuj, Usun</td>
                             </tr>
                             </tbody>
                         </table>

@@ -29,7 +29,7 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(value= {"/user/product"}, method= RequestMethod.GET)
-    public ModelAndView weight() {
+    public ModelAndView product() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
@@ -77,3 +77,4 @@ public class ProductController {
     }
 
 }
+
