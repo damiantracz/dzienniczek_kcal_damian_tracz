@@ -22,7 +22,8 @@ public class Diary {
     @Column(name = "weight")
     private double weight;
 
-    @CreationTimestamp
+    //@CreationTimestamp
+    @Temporal(TemporalType.DATE)
     @Column(name = "date")
     private Date date;
 

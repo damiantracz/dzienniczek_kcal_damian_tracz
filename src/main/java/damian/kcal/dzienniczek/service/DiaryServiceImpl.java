@@ -8,6 +8,7 @@ import damian.kcal.dzienniczek.repository.MakroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("diaryService")
@@ -21,5 +22,8 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public List<Diary> findByUser(User user) {return (List<Diary>) diaryRepository.findByUser(user);}
+
+    @Override
+    public List<Diary> findByUserAndDate(User user, Date date){ return (List<Diary>) diaryRepository.findByUserAndDate(user, date);}
 
 }

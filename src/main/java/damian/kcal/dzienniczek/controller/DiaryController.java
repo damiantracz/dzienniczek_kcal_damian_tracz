@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Console;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Controller
@@ -32,10 +35,11 @@ public class DiaryController {
     private DiaryService diaryService;
 
     @RequestMapping(value= {"/user/diary"}, method= RequestMethod.GET)
-    public ModelAndView diary() {
+    public ModelAndView diary() throws ParseException {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+
 
 
         Product product = new Product();
@@ -43,9 +47,20 @@ public class DiaryController {
         List<Product> productList = new ArrayList<Product>();
         productList = productService.findAllProducts();
 
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = Calendar.getInstance().getTime();
+        String reportDate = df.format(today);
+        System.out.println("Report Date: " + reportDate);
+
         Diary diary = new Diary();
         List<Diary> diaryList = new ArrayList<Diary>();
-        diaryList = diaryService.findByUser(user);
+        //diaryList = diaryService.findByUser(user);
+        diaryList = diaryService.findByUserAndDate(user, new SimpleDateFormat("yyyy-MM-dd").parse(reportDate));
+
+
+
+
 
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
         model.addObject("allProductList", productList);
@@ -55,7 +70,7 @@ public class DiaryController {
     }
 
     @RequestMapping(value= {"/user/diary"}, method= RequestMethod.POST)
-    public ModelAndView createDiary(@Valid Diary diary) {
+    public ModelAndView createDiary(@Valid Diary diary) throws ParseException {
         ModelAndView model = new ModelAndView();
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -65,16 +80,33 @@ public class DiaryController {
 
         if (userExists != null) {
 
+            Date date = new Date();
+
+
             diary.setUser(user);
+            diary.setDate(date);
             diaryService.saveDiary(diary);
 
             Product product = new Product();
             List<Product> productList = new ArrayList<Product>();
             productList = productService.findAllProducts();
 
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = Calendar.getInstance().getTime();
+            String reportDate = df.format(today);
+            System.out.println("Report Date: " + reportDate);
+
+
+            //Diary diary2 = new Diary();
+            List<Diary> diaryList = new ArrayList<Diary>();
+            //diaryList = diaryService.findByUser(user);
+            diaryList = diaryService.findByUserAndDate(user, new SimpleDateFormat("yyyy-MM-dd").parse(reportDate));
+
             model.addObject("userName", user.getFirstname() + " " + user.getLastname());
             model.addObject("allProductList", productList);
             model.addObject("diary", diary);
+            model.addObject("allDiaryList", diaryList);
             model.setViewName("user/diary");
         }
         return model;
