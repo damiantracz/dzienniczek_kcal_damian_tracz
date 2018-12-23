@@ -3,6 +3,7 @@ package damian.kcal.dzienniczek.controller;
 import damian.kcal.dzienniczek.model.Makro;
 import damian.kcal.dzienniczek.model.User;
 import damian.kcal.dzienniczek.model.Weight;
+import damian.kcal.dzienniczek.service.DiaryService;
 import damian.kcal.dzienniczek.service.MakroService;
 import damian.kcal.dzienniczek.service.UserService;
 import damian.kcal.dzienniczek.service.WeightService;
@@ -32,6 +33,9 @@ public class UserController {
 
     @Autowired
     private WeightService weightService;
+
+    @Autowired
+    private DiaryService diaryService;
 
     @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
     public ModelAndView login() {
@@ -112,10 +116,21 @@ public class UserController {
             System.out.println(weightL.getWeight());
         }
 
+
+        Object[][] sumMakro =  diaryService.findDiarySum();
+        System.out.println(sumMakro[0][1]);
+
+        //SELECT d.id, p.carbohydrates, p.protein, p.fat FROM `diary` d INNER JOIN `product` p ON d.product_id = p.id WHERE d.date = CURDATE()
+
+        //SELECT ROUND(SUM(p.carbohydrates*(d.weight/100))) as carbohydratesDay, ROUND(SUM(p.protein*(d.weight/100))) as proteinDay, ROUND(SUM(p.fat*(d.weight/100))) as fatDay FROM `diary` d INNER JOIN `product` p ON d.product_id = p.id WHERE d.date = CURDATE()
+
+
+
+
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
-        model.addObject("userCarbohydrates", makro.getCarbohydrates());
-        model.addObject("userProtein", makro.getProtein());
-        model.addObject("userFat", makro.getFat());
+        model.addObject("userCarbohydrates", (makro.getCarbohydrates() - (Double) sumMakro[0][0]));
+        model.addObject("userProtein", (makro.getProtein() - (Double) sumMakro[0][1]));
+        model.addObject("userFat", (makro.getFat() - (Double) sumMakro[0][2]));
         model.addObject("onlyWeightList", onlyWeightList);
         model.addObject("weightList", weightList);
         model.setViewName("home/home");

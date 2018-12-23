@@ -26,4 +26,8 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Diary> findByUserAndDate(User user, Date date){ return (List<Diary>) diaryRepository.findByUserAndDate(user, date);}
 
+
+    @Override
+    public Object[][] findDiarySum(){return diaryRepository.findDiarySum(); }
+
 }

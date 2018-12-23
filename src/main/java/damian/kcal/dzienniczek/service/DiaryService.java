@@ -12,4 +12,6 @@ public interface DiaryService {
     List<Diary> findByUser(User user);
 
     List<Diary> findByUserAndDate(User user, Date date);
+
+    Object [][] findDiarySum();
 }

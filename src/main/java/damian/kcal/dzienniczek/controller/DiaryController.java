@@ -3,6 +3,7 @@ package damian.kcal.dzienniczek.controller;
 import damian.kcal.dzienniczek.model.Diary;
 import damian.kcal.dzienniczek.model.Product;
 import damian.kcal.dzienniczek.model.User;
+import damian.kcal.dzienniczek.model.Weight;
 import damian.kcal.dzienniczek.service.DiaryService;
 import damian.kcal.dzienniczek.service.ProductService;
 import damian.kcal.dzienniczek.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -110,6 +112,25 @@ public class DiaryController {
             model.setViewName("user/diary");
         }
         return model;
+    }
+
+
+
+
+    @RequestMapping(value= {"/user/diarySum"}, method=RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Object[][] getDiarySum() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+
+        Object[][] maxObd =  diaryService.findDiarySum();
+        System.out.println(maxObd[0][1]);
+
+        return diaryService.findDiarySum();
+
+
     }
 
 }
