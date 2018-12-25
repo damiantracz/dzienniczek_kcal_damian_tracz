@@ -118,14 +118,17 @@ public class UserController {
 
 
         Object[][] sumMakro =  diaryService.findDiarySum();
-        System.out.println(sumMakro[0][1]);
+        //System.out.println(sumMakro[0][1]);
 
         //SELECT d.id, p.carbohydrates, p.protein, p.fat FROM `diary` d INNER JOIN `product` p ON d.product_id = p.id WHERE d.date = CURDATE()
 
         //SELECT ROUND(SUM(p.carbohydrates*(d.weight/100))) as carbohydratesDay, ROUND(SUM(p.protein*(d.weight/100))) as proteinDay, ROUND(SUM(p.fat*(d.weight/100))) as fatDay FROM `diary` d INNER JOIN `product` p ON d.product_id = p.id WHERE d.date = CURDATE()
 
-
-
+        //jeśli użytkownik nic jeszcze nie zjadł dzisiaj to zwraca null. Zamieniam null na 0.
+        if (sumMakro[0][0] == null) { sumMakro[0][0] = 0.0; }
+        if (sumMakro[0][1] == null) { sumMakro[0][1] = 0.0; }
+        if (sumMakro[0][2] == null) { sumMakro[0][2] = 0.0; }
+        //System.out.println(sumMakro[0][1]);
 
         model.addObject("userName", user.getFirstname() + " " + user.getLastname());
         model.addObject("userCarbohydrates", (makro.getCarbohydrates() - (Double) sumMakro[0][0]));

@@ -143,7 +143,7 @@
                             <tr th:each="userWeight : ${userWeights}">
                                 <td th:text="${userWeight.date}"></td>
                                 <td th:text="${userWeight.weight}"></td>
-                                <td><a th:href="@{'/user/weight/' + ${userWeight.id}}">Edytuj</a> <a th:href="@{'/user/weight/' + ${userWeight.id}}">Usuń</a></td>
+                                <td> <button type="button" th:id="@{'' + ${userWeight.id}}" class="btn btn-primary btn-sm btnDelete">Usuń</button> </td>
                             </tr>
                             </tbody>
                         </table>
@@ -154,10 +154,6 @@
 
         </div>
         <!-- /.container-fluid -->
-
-
-
-
 
 
         <!-- Sticky Footer -->
@@ -203,10 +199,6 @@
 
 
 
-
-
-
-
 <!-- Bootstrap core JavaScript-->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -221,6 +213,21 @@
 <!-- Demo scripts for this page-->
 <script src="/js/demo/datatables-demo.js"></script>
 <script src="/js/demo/chart-area-demo.js"></script>
+
+
+<script>
+
+    $(".btnDelete").click(function() {
+        $.ajax({
+            url: '/user/weight/'+this.id,
+            type: 'DELETE',
+            success: function(result) {
+                location.reload();
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

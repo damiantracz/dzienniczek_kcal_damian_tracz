@@ -16,5 +16,7 @@ public interface WeightService {
 
 
     List<Weight> findByUser(User user);
+
+    void deleteById(Integer id);
 }
 

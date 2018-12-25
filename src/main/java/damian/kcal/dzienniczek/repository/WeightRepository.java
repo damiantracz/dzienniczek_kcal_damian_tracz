@@ -14,4 +14,6 @@ import java.util.List;
 public interface WeightRepository extends JpaRepository<Weight, Integer> {
 
     List<Weight> findByUser(User user);
+
+    void deleteById(Integer id);
 }

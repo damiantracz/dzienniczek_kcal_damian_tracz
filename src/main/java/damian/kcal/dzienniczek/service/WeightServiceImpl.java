@@ -43,4 +43,7 @@ public class WeightServiceImpl implements WeightService {
         return (List<Weight>) weightRepository.findByUser(user);
     }
 
+    @Override
+    public void deleteById(Integer id){weightRepository.deleteById(id);}
+
 }
