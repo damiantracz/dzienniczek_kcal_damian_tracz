@@ -10,4 +10,6 @@ public interface MakroService {
     public void saveMakro(Makro makro);
 
     List<Makro> findByUser(User user);
+
+    void deleteById(Integer id);
 }

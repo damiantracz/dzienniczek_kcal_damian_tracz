@@ -24,4 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllProducts() {return (List<Product>) productRepository.findAll();}
+
+    @Override
+    public void deleteById(Integer id){productRepository.deleteById(id);}
 }

@@ -30,5 +30,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Integer> {
     @Query(value ="SELECT ROUND(SUM(p.carbohydrates*(d.weight/100))) as carbohydratesDay, ROUND(SUM(p.protein*(d.weight/100))) as proteinDay, ROUND(SUM(p.fat*(d.weight/100))) as fatDay FROM `diary` d INNER JOIN `product` p ON d.product_id = p.id WHERE d.date = CURDATE()", nativeQuery = true)
     Object [][] findDiarySum();
 
+    void deleteById(Integer id);
 
 }

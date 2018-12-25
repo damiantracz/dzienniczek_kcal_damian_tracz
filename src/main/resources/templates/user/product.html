@@ -194,7 +194,7 @@
                                 <td th:text="${userProduct.carbohydrates}"></td>
                                 <td th:text="${userProduct.protein}"></td>
                                 <td th:text="${userProduct.fat}"></td>
-                                <td>Edytuj Usuń</td>
+                                <td> <button type="button" th:id="@{'' + ${userProduct.id}}" class="btn btn-primary btn-sm btnDelete">Usuń</button> </td>
                             </tr>
                             </tbody>
                         </table>
@@ -273,6 +273,21 @@
     <!-- Demo scripts for this page-->
     <script src="/js/demo/datatables-demo.js"></script>
     <script src="/js/demo/chart-area-demo.js"></script>
+
+
+<script>
+
+    $(".btnDelete").click(function() {
+        $.ajax({
+            url: '/user/product/'+this.id,
+            type: 'DELETE',
+            success: function(result) {
+                location.reload();
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

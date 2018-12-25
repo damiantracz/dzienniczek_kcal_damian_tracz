@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.Console;
 import java.text.DateFormat;
@@ -132,5 +134,41 @@ public class DiaryController {
 
 
     }
+
+
+
+    @RequestMapping(value= {"/user/diary/{diaryId}"}, method=RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteWeight(HttpServletResponse response, @PathVariable int diaryId) {
+
+        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        // User user = userService.findUserByEmail(auth.getName());
+
+        //User userExists = userService.findUserByEmail(user.getEmail());
+
+        diaryService.deleteById(diaryId);
+        System.out.println("delete method");
+
+        //if(userExists != null) {
+
+        //weight.setWeight(80);
+        //weight.setUser(user);
+
+        //weightService.deleteById(weightId);
+        //System.out.println("delete method");
+
+        //List<Weight> weightList = new ArrayList<Weight>();
+        //weightList = weightService.findByUser(user);
+
+        //model.addObject("userName", user.getFirstname() + " " + user.getLastname());
+        //model.addObject("userWeights", weightList);
+        //model.addObject("weight", weight);
+        //model.setViewName("user/weight");
+        //}
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        return "TEXT";
+    }
+
 
 }

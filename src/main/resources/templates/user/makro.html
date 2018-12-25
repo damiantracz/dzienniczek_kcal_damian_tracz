@@ -98,6 +98,67 @@
 
 
 
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Dodaj nowe makro
+                </div>
+                <div class="card-body">
+
+                    <!--https://www.bootply.com/jrNvaahcOh-->
+                    <div class="container-fluid">
+                        <form class="form-horizontal" role="form" method="POST" th:action="@{/user/makro}" th:object="${makro}">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="carbohydrates" class="col-md-12 control-label">Węglowodany/100g:</label>
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" id="carbohydrates" placeholder="Węglowodany/100g:" name="carbohydrates"  required="required" step="0.01" pattern="\d*">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="protein" class="col-md-12 control-label">Białko/100g:</label>
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" id="protein" placeholder="Białko/100g"  name="protein" required="required" step="0.01" pattern="\d*">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="fat" class="col-md-12 control-label">Tłuszcz/100g:</label>
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" id="fat" placeholder="Tłuszcz/100g" name="fat"  required="required" step="0.01" pattern="\d*">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.row this actually does not appear to be needed with the form-horizontal -->
+
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-ld btn-primary ">Zapisz</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
@@ -130,7 +191,7 @@
                                 <td th:text="${userMakro.carbohydrates}"></td>
                                 <td th:text="${userMakro.protein}"></td>
                                 <td th:text="${userMakro.fat}"></td>
-                                <td>Edytuj Usuń</td>
+                                <td> <button type="button" th:id="@{'' + ${userMakro.id}}" class="btn btn-primary btn-sm btnDelete">Usuń</button> </td>
                             </tr>
                             </tbody>
                         </table>
@@ -209,6 +270,20 @@
 <!-- Demo scripts for this page-->
 <script src="/js/demo/datatables-demo.js"></script>
 <script src="/js/demo/chart-area-demo.js"></script>
+
+<script>
+
+    $(".btnDelete").click(function() {
+        $.ajax({
+            url: '/user/makro/'+this.id,
+            type: 'DELETE',
+            success: function(result) {
+                location.reload();
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

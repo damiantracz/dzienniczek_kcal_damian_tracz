@@ -12,4 +12,6 @@ public interface ProductService {
     List<Product> findByUser(User user);
 
     List<Product> findAllProducts();
+
+    void deleteById(Integer id);
 }

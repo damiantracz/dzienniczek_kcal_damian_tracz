@@ -180,7 +180,7 @@
                                 <td th:text="${diaryList.date}"></td>
                                 <td th:text="${diaryList.product.name}"></td>  <!--"data-department=${user.department!=null}?${user.department.name}:'not specified'"-->
                                 <td th:text="${diaryList.weight}"></td>
-                                <td>Edytuj, Usun</td>
+                                <td> <button type="button" th:id="@{'' + ${diaryList.id}}" class="btn btn-primary btn-sm btnDelete">Usuń</button> </td>
                             </tr>
                             </tbody>
                         </table>
@@ -259,6 +259,21 @@
 <!-- Demo scripts for this page-->
 <script src="/js/demo/datatables-demo.js"></script>
 <script src="/js/demo/chart-area-demo.js"></script>
+
+
+<script>
+
+    $(".btnDelete").click(function() {
+        $.ajax({
+            url: '/user/diary/'+this.id,
+            type: 'DELETE',
+            success: function(result) {
+                location.reload();
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

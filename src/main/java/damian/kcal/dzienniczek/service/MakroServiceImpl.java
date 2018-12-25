@@ -24,4 +24,7 @@ public class MakroServiceImpl implements MakroService{
         return (List<Makro>) makroRepository.findByUser(user);
     }
 
+    @Override
+    public void deleteById(Integer id){makroRepository.deleteById(id);}
+
 }

@@ -11,4 +11,7 @@ import java.util.List;
 public interface MakroRepository extends JpaRepository<Makro, Integer> {
 
     List<Makro> findByUser(User user);
+
+    void deleteById(Integer id);
+
 }

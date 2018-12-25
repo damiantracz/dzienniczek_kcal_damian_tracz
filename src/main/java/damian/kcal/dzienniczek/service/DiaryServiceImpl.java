@@ -30,4 +30,7 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public Object[][] findDiarySum(){return diaryRepository.findDiarySum(); }
 
+    @Override
+    public void deleteById(Integer id){diaryRepository.deleteById(id);}
+
 }

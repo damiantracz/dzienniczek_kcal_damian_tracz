@@ -14,4 +14,6 @@ public interface DiaryService {
     List<Diary> findByUserAndDate(User user, Date date);
 
     Object [][] findDiarySum();
+
+    void deleteById(Integer id);
 }
